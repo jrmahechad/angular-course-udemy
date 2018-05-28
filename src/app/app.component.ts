@@ -6,11 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  username = '';
-  usernameIsEmpty() {
-    return !!this.username.length;
-  }
-  onResetUsername() {
-    this.username = '';
-  }
 }
