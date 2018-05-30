@@ -30,9 +30,18 @@
       <!--p [appBetterHighlight]="'red'" [defaultColor]="'yellow'" >Style me with better directive!</p-->
       <!--This is a special binding for strings, we ommit the [] on the property and the '' on the value-->
       <p [appBetterHighlight]="'red'" defaultColor="yellow" >Style me with better directive!</p>
+      <p *appUnless="onlyOdd">Unless directive</p>
       <ng-template [ngIf]="onlyOdd">
         <p>Only odd</p>
       </ng-template>
+
+      <div [ngSwitch]="value">
+        <p *ngSwitchCase="5">Value is 5</p>
+        <p *ngSwitchCase="10">Value is 10</p>
+        <p *ngSwitchCase="1">Value is 15</p>
+        <p *ngSwitchDefault>Value is Default</p>
+
+      </div>
     </div>
   </div>
 </div>
