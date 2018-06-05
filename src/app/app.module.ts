@@ -6,8 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { ActiveUsersComponent } from './active-users/active-users.component';
 import { InactiveUsersComponent } from './inactive-users/inactive-users.component';
-import { UsersService } from './services/users.service';
-import { CountService } from './services/count.service';
+import { CounterService } from './counter.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,7 @@ import { CountService } from './services/count.service';
     FormsModule,
     HttpModule
   ],
-  providers: [UsersService, CountService],
+  providers: [CounterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
