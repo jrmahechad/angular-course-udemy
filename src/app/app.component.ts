@@ -8,15 +8,15 @@ import * as firebase from 'firebase';
 })
 export class AppComponent implements OnInit {
   loadedFeature = 'recipe';
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
-  }
 
   ngOnInit() {
-    const config = {
-      apiKey: 'AIzaSyBQudcQaK6biQlgtn50PHLCb71p4Uk-Kew',
-      authDomain: 'angular-course-udemy.firebaseapp.com',
-    };
-    firebase.initializeApp(config);
+    firebase.initializeApp({
+      apiKey: "AIzaSyDGDTtGNC4FkKpSe85qb2wLHzNi2xkxFy8",
+      authDomain: "ng-recipe-book.firebaseapp.com"
+    });
+  }
+
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
   }
 }

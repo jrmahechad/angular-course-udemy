@@ -1,45 +1,37 @@
-import { Recipe } from './recipe.model';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+
+import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class RecipeService {
-
   recipesChanged = new Subject<Recipe[]>();
+
   private recipes: Recipe[] = [
     new Recipe(
-      'recipe 1',
-      'description 1',
-      'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/frying-pan-pizza-easy-recipe-collection.jpg',
+      'Tasty Schnitzel',
+      'A super-tasty Schnitzel - just awesome!',
+      'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
       [
-        new Ingredient('Tommatoes', 5),
-        new Ingredient('Cheese', 6),
-      ]
-    ),
-    new Recipe(
-      'recipe 2',
-      'description 2',
-      'http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/skillet-chicken-roasted-potatoes-carrots-ck.jpg?itok=dzdpIO4s',
+        new Ingredient('Meat', 1),
+        new Ingredient('French Fries', 20)
+      ]),
+    new Recipe('Big Fat Burger',
+      'What else you need to say?',
+      'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
       [
-        new Ingredient('Carrots', 7),
-        new Ingredient('Lemmons', 6),
-      ]
-    ),
-    new Recipe(
-      'recipe 3',
-      'description 3',
-      'https://img.taste.com.au/GR-XKpyy/taste/2014/10/australias-most-cooked-pancake-recipe-118377-2.jpg',
-      [
-        new Ingredient('Honey', 1),
-        new Ingredient('Waffles', 5),
-      ]
-    ),
+        new Ingredient('Buns', 2),
+        new Ingredient('Meat', 1)
+      ])
   ];
 
-  constructor(private slService: ShoppingListService) {
+  constructor(private slService: ShoppingListService) {}
 
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   getRecipes() {
@@ -56,21 +48,16 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
-    this.recipesChanged.next(this.getRecipes());
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
-    this.recipesChanged.next(this.getRecipes());
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
-    this.recipesChanged.next(this.getRecipes());
-  }
-
-  setRecipes(recipes: Recipe[]) {
-    this.recipes = recipes;
-    this.recipesChanged.next(this.getRecipes());
+    this.recipesChanged.next(this.recipes.slice());
   }
 }
