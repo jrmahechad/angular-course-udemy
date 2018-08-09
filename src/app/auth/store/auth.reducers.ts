@@ -1,5 +1,4 @@
 import * as AuthActions from './auth.actions';
-import { AuthService } from '../auth.service';
 
 export interface State {
   token: string;

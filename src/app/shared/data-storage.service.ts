@@ -4,13 +4,13 @@ import 'rxjs/Rx';
 
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class DataStorageService {
-  constructor(private httpClient: HttpClient,
-              private recipeService: RecipeService,
-              private authService: AuthService) {
+  constructor(
+    private httpClient: HttpClient,
+    private recipeService: RecipeService,
+  ) {
   }
 
   storeRecipes() {
@@ -21,7 +21,7 @@ export class DataStorageService {
     //   params: new HttpParams().set('auth', token)
     //   // headers: headers
     // });
-    const req = new HttpRequest('PUT', 'https://angular-course-udemy.firebaseio.com/project/recipes.json', this.recipeService.getRecipes(), {reportProgress: true});
+    const req = new HttpRequest('PUT', 'https://angular-course-udemy.firebaseio.com/project/recipes.json', this.recipeService.getRecipes(), { reportProgress: true });
     return this.httpClient.request(req);
   }
 
