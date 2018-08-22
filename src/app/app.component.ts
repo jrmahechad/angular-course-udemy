@@ -23,8 +23,8 @@ import {
         transform: 'translateX(100px)'
       })),
       transition('normal <=> highlighted', animate(300)),
-      //transition('normal => highlighted', animate(300)),
-      //transition('highlighted => normal', animate(800))
+      // transition('normal => highlighted', animate(300)),
+      // transition('highlighted => normal', animate(800))
     ]),
     trigger('wildState', [
       state('normal', style({
@@ -59,17 +59,59 @@ import {
 
       transition('void => *', [
         style({
-          opacity:0,
+          opacity: 0,
           transform: 'translateX(-100px)'
         }),
         animate(300)
       ]),
       transition('* => void', [
         animate(300, style({
-          opacity:0,
+          opacity: 0,
           transform: 'translateX(100px)'
         })),
 
+      ]),
+    ]),
+    trigger('list2', [
+      state('in', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+
+      transition('void => *', [
+        animate(1000, keyframes([
+          style({
+            transform: 'translatex(-100px)',
+            opacity: 0,
+            offset: 0,
+          }),
+          style({
+            transform: 'translatex(-50px)',
+            opacity: 0.5,
+            offset: 0.3,
+          }),
+          style({
+            transform: 'translatex(-20px)',
+            opacity: 1,
+            offset: 0.8,
+          }),
+          style({
+            transform: 'translatex(-0px)',
+            opacity: 1,
+            offset: 1,
+          })
+        ]))
+      ]),
+      transition('* => void', [
+        group([
+          animate(300, style({
+            color: 'red',
+          })),
+          animate(800, style({
+            opacity: 0,
+            transform: 'translateX(100px)'
+          })),
+        ])
       ]),
     ]),
   ]
@@ -80,8 +122,8 @@ export class AppComponent {
   list = ['Milk', 'Sugar', 'Bread'];
 
   onAnimate() {
-    this.state === 'normal' ? this.state = 'highlighted' : this.state = 'normal'
-    this.wildState === 'normal' ? this.wildState = 'highlighted' : this.wildState = 'normal'
+    this.state === 'normal' ? this.state = 'highlighted' : this.state = 'normal';
+    this.wildState === 'normal' ? this.wildState = 'highlighted' : this.wildState = 'normal';
   }
   onShrink() {
     this.wildState = 'shrunken';
@@ -93,6 +135,15 @@ export class AppComponent {
 
   onDelete(item) {
     this.list.splice(this.list.indexOf(item), 1);
+  }
+
+  animationStarted(event) {
+    console.log(event);
+
+  }
+
+  animationEnded(event) {
+    console.log(event);
   }
 
 
